@@ -1,0 +1,137 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+
+\usepackage{bm}
+
+\linespread{1.8}
+
+\title{作业二: $\bm{Shell}$\textbf{命令脚本设计学习}}
+
+\author{王永康 \\ 数学与应用数学 3210102882}
+
+\begin{document}
+
+\maketitle
+
+\vspace{5ex}
+
+Shell终端解释器是人与计算机硬件之间的“翻译官”,
+它作为用户与Linux系统内部的通信媒介,除了能够支持各种变量与参数外,
+还提供了诸如循环、分支等高级编程语言才有的控制结构特性.
+
+\vspace{10ex}
+
+它既可以交互式地使用,用户每输入一条命令就立即执行；
+又可以以批处理的方式工作,执行用户事先编写好一个完整的Shell脚本中诸多的命令,
+在使用中快捷方便,简单高效.它在语言上与编程语言有相通之处,以下是我的报告.
+
+\clearpage
+
+\section{Shell命令脚本流程控制语句}
+
+if条件测试语句可以让脚本根据实际情况自动执行相应的命令,
+有单分支结构、双分支结构、多分支结构.
+
+
+\linespread{1}
+\begin{verbatim}
+if condition
+then
+    statements
+elif condition
+then
+    statements
+else
+    statements
+\end{verbatim}
+
+for循环语句允许脚本一次性读取多个信息,
+然后逐一对信息进行操作处理。
+
+\linespread{1}
+\begin{verbatim}
+for vatiable in values
+do
+    statements
+done
+\end{verbatim}
+
+while条件循环语句是一种让脚本根据某些条件来重复执行命令的语句,
+它的循环结构往往在执行前并不确定最终执行的次数,
+while循环语句通过判断条件测试的真假来决定是否继续执行命令,
+若条件为真就继续执行,为假就结束循环。
+
+\linespread{1}
+\begin{verbatim}
+while condition document
+    statements
+done
+\end{verbatim}
+
+\clearpage
+
+\section{Shell命令脚本设计实践}
+
+\textbf{和电脑玩"石头剪刀布"}
+
+\linespread{0.8}
+\begin{verbatim}
+    #!/bin/bash
+
+    list=(石头 剪刀 布)
+    x=$(($RANDOM%3))
+    computer=${list[$x]}
+    
+    echo "你出什么?"
+    echo "石头(1);剪刀(2);布(3)"
+    read  -p  "请选择(1/2/3):"  you
+    echo "电脑出了 $computer"
+    case  $you  in
+        1)
+            if [ $x -eq 0 ];then
+                echo "Not Nad~"
+            elif [ $x -eq 1 ];then
+                echo "You Win!!!"
+            else
+                echo "You Loser!"
+            fi;;
+        2)   
+            if [ $x -eq 0 ];then
+                echo "You Loser!"
+            elif [ $x -eq 1 ];then
+                echo "Not Nad~"
+            else
+                echo "You Win!!!"
+            fi;;
+        3)
+            if [ $x -eq 0 ];then
+            e   cho "You Win!!!"
+            elif [ $x -eq 1 ];then
+                echo "You Loser!"
+            else
+                echo "Not Nad~"
+            fi;;
+        *)
+            echo "输入数字1/2/3"
+    esac
+\end{verbatim}
+
+\textbf{效果如下}
+
+\linespread{1}
+\begin{verbatim}
+    madison@madison-virtual-machine:~/Desktop$ /bin/bash jdstb.sh
+    你出什么?
+    石头(1);剪刀(2);布(3)
+    请选择(1/2/3):1
+    电脑出了 剪刀
+    You Win!!!
+\end{verbatim}
+
+
+
+
+\end{document}
